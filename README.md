@@ -5,14 +5,19 @@
 ####因为刚接触，改着改着就有点冗余，代码不是很优美，会慢慢优化的.
 --
 ##介绍:[简书上有更详细的介绍](http://www.jianshu.com/p/cb029455f9cd)
-	
-	
+
+### Installation
+```
+npm install --save react-native-hmRefresh
+```
+
+
 **1. SwRefreshScrollView**
 
 兼容ScrollView的属性
 
 * props:
-	
+
 ```javascript     
 /**
 * 刷新数据时的操作, 参数 end:function 操作结束时执行end() 以结束刷新状态
@@ -31,26 +36,26 @@ customRefreshView:PropTypes.func,
 customRefreshViewHeight:PropTypes.number
 ```
  * func:
- 
+
 ```javascript 	
 /**
 * 手动调用刷新
 */
 beginRefresh()
-  
+
 /**
 * 手动结束 推荐end()回调
 */
 endRefresh()
 
-```	
-      
+```
+
  **2. SwRefreshListView**     
- 
+
  兼容ListView, SwRefreshScrollView属性 新增endLoadMore方法
- 
+
  * props:
- 
+
 ```javascript  			
 /**
 * 自定义底部部刷新指示组件的渲染方法,
@@ -80,9 +85,9 @@ noMoreDataTitle:PropTypes.string,
 */
 isShowLoadMore:PropTypes.bool
 ```
-	    
+
  * func:
- 
+
 ```javascript 	
 /**
 * 重置已无更多数据的状态 通常用于下拉刷新数据完毕后 重置状态
@@ -98,7 +103,7 @@ setNoMoreData()
 * 手动调用刷新
 */
 beginRefresh()
-  
+
 /**
 * 手动结束 推荐end()回调
 */
@@ -109,8 +114,8 @@ endRefresh()
  * */
  endLoadMore(isNoMoreData)
 ```		  	
-		  	
- 	   
+
+
 ##使用:
 	npm install react-native-swRefresh --save    
 * 导入
@@ -124,9 +129,9 @@ import {
   LoadMoreStatus //上拉加载状态 用于自定义
 } from 'react-native-swRefresh'
 ```
-		
+
 *  **Demo**: SwRefreshScrollView
-  
+
 ```javascript		
 	<SwRefreshScrollView
 		onRefresh={this._onRefresh.bind(this)}
@@ -146,16 +151,16 @@ import {
 		let timer =  setTimeout(()=>{
 		 clearTimeout(timer)
 		 alert('刷新成功')
-		
+
 		 end()//刷新成功后需要调用end结束刷新
-		
+
 		},1500)
 	}
 ```		
-		
-	
+
+
 *  **Demo**: SwRefreshListView
-	
+
 ```javascript		
  <SwRefreshListView
     dataSource={this.state.dataSource}
@@ -187,7 +192,7 @@ import {
 	// this.refs.listView.endRefresh() //新增方法 结束刷新 建议使用end() 。当然这个可以在任何地方使用
     },1500)
   }
-	
+
   /**
    * 模拟加载更多
    * @param end
@@ -205,10 +210,10 @@ import {
         dataSource:this._dataSource.cloneWithRows(data)
       })
       end(this._page > 2)//加载成功后需要调用end结束刷新 假设加载4页后数据全部加载完毕
-	
+
     },2000)
   }
-  
+
  componentDidMount() {
    let timer = setTimeout(()=>{
      clearTimeout(timer)
@@ -216,8 +221,8 @@ import {
     },500) //自动调用开始刷新 新增方法
   }
 ```		  
-		  
-		  
+
+
 ###具体查看Demo
 ###演示
 
