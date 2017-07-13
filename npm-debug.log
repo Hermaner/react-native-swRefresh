@@ -1,0 +1,100 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'publish', '.' ]
+2 info using npm@3.7.0
+3 info using node@v6.9.0
+4 verbose publish [ '.' ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec Result {
+7 silly cache add   raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: '/Users/herman/workspace/fork/react-native-swRefresh',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory /Users/herman/.npm/react-native-swrefresh-hm/0.0.1/package.tgz not in flight; packing
+9 verbose correctMkdir /Users/herman/.npm correctMkdir not in flight; initializing
+10 info lifecycle react-native-swrefresh-hm@0.0.1~prepublish: react-native-swrefresh-hm@0.0.1
+11 silly lifecycle react-native-swrefresh-hm@0.0.1~prepublish: no script for prepublish, continuing
+12 verbose tar pack [ '/Users/herman/.npm/react-native-swrefresh-hm/0.0.1/package.tgz',
+12 verbose tar pack   '/Users/herman/workspace/fork/react-native-swRefresh' ]
+13 verbose tarball /Users/herman/.npm/react-native-swrefresh-hm/0.0.1/package.tgz
+14 verbose folder /Users/herman/workspace/fork/react-native-swRefresh
+15 verbose addLocalTarball adding from inside cache /Users/herman/.npm/react-native-swrefresh-hm/0.0.1/package.tgz
+16 verbose correctMkdir /Users/herman/.npm correctMkdir not in flight; initializing
+17 silly cache afterAdd react-native-swrefresh-hm@0.0.1
+18 verbose afterAdd /Users/herman/.npm/react-native-swrefresh-hm/0.0.1/package/package.json not in flight; writing
+19 verbose correctMkdir /Users/herman/.npm correctMkdir not in flight; initializing
+20 verbose afterAdd /Users/herman/.npm/react-native-swrefresh-hm/0.0.1/package/package.json written
+21 silly publish { version: '0.0.1',
+21 silly publish   name: 'react-native-swrefresh-hm',
+21 silly publish   description: 'react native pull refresh push loadMore scrollView,listView下拉刷新下拉加载控件,支持自定义，简单好用',
+21 silly publish   repository:
+21 silly publish    { type: 'git',
+21 silly publish      url: 'git+https://github.com/shiwenwen/react-native-swRefresh-hm.git' },
+21 silly publish   license: 'MIT',
+21 silly publish   main: './index.js',
+21 silly publish   keywords:
+21 silly publish    [ 'react-component',
+21 silly publish      'react-native',
+21 silly publish      'ios',
+21 silly publish      'android',
+21 silly publish      'pull refresh',
+21 silly publish      'push loadMore',
+21 silly publish      '下拉刷新',
+21 silly publish      '上拉加载' ],
+21 silly publish   dependencies: {},
+21 silly publish   readme: '# react-native-swRefresh\n--\n##react-native-swRefresh是提供react-native下拉刷新和下拉加载组件，简单好用，支持自定义,支持iOS，Android 。\n###提供SwRefreshScrollView和SwRefreshListView两种支持下拉刷新的组件，SwRefreshListView支持上拉加载更多。 实现方式不一样 所以Android体验可能稍微有点不同。\n####因为刚接触，改着改着就有点冗余，代码不是很优美，会慢慢优化的.\n--\n##介绍:[简书上有更详细的介绍](http://www.jianshu.com/p/cb029455f9cd)\n\n### Installation\n```\nnpm install --save react-native-swRefresh-hm\n```\n\n\n**1. SwRefreshScrollView**\n\n兼容ScrollView的属性\n\n* props:\n\n```javascript     \n/**\n* 刷新数据时的操作, 参数 end:function 操作结束时执行end() 以结束刷新状态\n*/\nonRefresh:PropTypes.func,\n/**\n* 需要返回一个自定义的刷新视图,\n* 参数:\n*  refresStatus:RefreshStatus, 0 下拉以刷新 1 松开以刷新 2 刷新中\n*  offsetY:number 下拉的距离 用于自定义刷新\n*/\ncustomRefreshView:PropTypes.func,\n/**\n* 如果自定义刷新视图 需要传递这个视图的高度 默认视图情况下 此属性无效\n*/\ncustomRefreshViewHeight:PropTypes.number\n```\n * func:\n\n```javascript \t\n/**\n* 手动调用刷新\n*/\nbeginRefresh()\n\n/**\n* 手动结束 推荐end()回调\n*/\nendRefresh()\n\n```\n\n **2. SwRefreshListView**     \n\n 兼容ListView, SwRefreshScrollView属性 新增endLoadMore方法\n\n * props:\n\n```javascript  \t\t\t\n/**\n* 自定义底部部刷新指示组件的渲染方法,\n* 参数\n*/\ncustomLoadMoreView:PropTypes.func,\n/**\n* 处于pushing（加载更多时）状态时执行的方法\n* 参数：end，最后执行完操作后应该调用end(isNoMoreData)。\n* isNoMoreData 表示当前是否已经加载完所有数据 已无更多数据\n*/\nonLoadMore:PropTypes.func,\n/**\n* //默认样式中的上拉加载更多的提示语\n*/\npusuToLoadMoreTitle:PropTypes.string,\n/**\n* //默认样式中正在加载的提示语\n*/\nloadingTitle:PropTypes.string,\n/**\n* //默认样式中已无更多时的提示语\n*/\nnoMoreDataTitle:PropTypes.string,\n/**\n* 是否显示底部的加载更多 通常用于全部数据不足一页 底部还显示加载更多导致的难看\n*/\nisShowLoadMore:PropTypes.bool\n```\n\n * func:\n\n```javascript \t\n/**\n* 重置已无更多数据的状态 通常用于下拉刷新数据完毕后 重置状态\n*/\nresetStatus()\n/**\n* 直接将状态置为没有更多数据状态 通常用于第一次刷新加载的后数据已全部加载 不必下拉刷新\n* 也可使用 isShowLoadMore:PropTypes.bool将上拉加载组件隐藏\n*/\nsetNoMoreData()\n\n/**\n* 手动调用刷新\n*/\nbeginRefresh()\n\n/**\n* 手动结束 推荐end()回调\n*/\nendRefresh()\n/*\n * 手动结束加载\n * isNoMoreData 表示当前是否已经加载完所有数据 已无更多数据\n * */\n endLoadMore(isNoMoreData)\n```\t\t  \t\n\n\n##使用:\n\tnpm install react-native-swRefresh --save    \n* 导入\n\n```javascript\t\t\t\n//根据需要引入\nimport {\n  SwRefreshScrollView,\n  SwRefreshListView,\n  RefreshStatus, //刷新状态 用于自定义\n  LoadMoreStatus //上拉加载状态 用于自定义\n} from \'react-native-swRefresh\'\n```\n\n*  **Demo**: SwRefreshScrollView\n\n```javascript\t\t\n\t<SwRefreshScrollView\n\t\tonRefresh={this._onRefresh.bind(this)}\n\t\t//其他你需要设定的属性(包括ScrollView的属性)\n\t>\n\t\t<View style={styles.content}>\n\t\t\t<Text>下拉刷新ScrollView</Text>\n\t\t</View>\n\t</SwRefreshScrollView>\n\t-------------------------------------------------------------------------------\n\t/**\n\t* 模拟刷新\n\t* @param end\n\t* @private\n\t*/\n\t_onRefresh(end){\n\t\tlet timer =  setTimeout(()=>{\n\t\t clearTimeout(timer)\n\t\t alert(\'刷新成功\')\n\n\t\t end()//刷新成功后需要调用end结束刷新\n\n\t\t},1500)\n\t}\n```\t\t\n\n\n*  **Demo**: SwRefreshListView\n\n```javascript\t\t\n <SwRefreshListView\n    dataSource={this.state.dataSource}\n    ref="listView"\n    renderRow={this._renderRow.bind(this)}\n    onRefresh={this._onListRefersh.bind(this)}\n    onLoadMore={this._onLoadMore.bind(this)}\n   //其他需要设置的ListView属性\n/>\n -------------------------------------------------------------------------------\n /**\n   * 模拟刷新\n   * @param end\n   * @private\n   */\n  _onListRefersh(end){\n    let timer =  setTimeout(()=>{\n      clearTimeout(timer)\n      this._page=0\n      let data = []\n      for (let i = 0;i<10;i++){\n        data.push(i)\n      }\n      this.setState({\n        dataSource:this._dataSource.cloneWithRows(data)\n      })\n      this.refs.listView.resetStatus() //重置上拉加载的状态\n      end()//刷新成功后需要调用end结束刷新\n\t// this.refs.listView.endRefresh() //新增方法 结束刷新 建议使用end() 。当然这个可以在任何地方使用\n    },1500)\n  }\n\n  /**\n   * 模拟加载更多\n   * @param end\n   * @private\n   */\n  _onLoadMore(end){\n    let timer =  setTimeout(()=>{\n      clearTimeout(timer)\n      this._page++\n      let data = []\n      for (let i = 0;i<(this._page+1)*10;i++){\n        data.push(i)\n      }\n      this.setState({\n        dataSource:this._dataSource.cloneWithRows(data)\n      })\n      end(this._page > 2)//加载成功后需要调用end结束刷新 假设加载4页后数据全部加载完毕\n\n    },2000)\n  }\n\n componentDidMount() {\n   let timer = setTimeout(()=>{\n     clearTimeout(timer)\n      this.refs.listView.beginRefresh()\n    },500) //自动调用开始刷新 新增方法\n  }\n```\t\t  \n\n\n###具体查看Demo\n###演示\n\n![image](https://github.com/shiwenwen/react-native-swRefresh/blob/master/screenshot/refresh1.gif?raw=true)\n\n----\n\n![image](https://github.com/shiwenwen/react-native-swRefresh/blob/master/screenshot/refresh2.gif?raw=true)\n\n----\n\n![image](https://github.com/shiwenwen/react-native-swRefresh/blob/master/screenshot/refresh3.gif?raw=true)\n\n-----\n\n![image](https://github.com/shiwenwen/react-native-swRefresh/blob/master/screenshot/refresh4.gif?raw=true)\n',
+21 silly publish   readmeFilename: 'README.md',
+21 silly publish   gitHead: '82453a58ba6125622037cc823cae4780872eaf8a',
+21 silly publish   bugs: { url: 'https://github.com/shiwenwen/react-native-swRefresh-hm/issues' },
+21 silly publish   homepage: 'https://github.com/shiwenwen/react-native-swRefresh-hm#readme',
+21 silly publish   _id: 'react-native-swrefresh-hm@0.0.1',
+21 silly publish   scripts: {},
+21 silly publish   _shasum: 'b9ed9551b8b2de18d7d72428b21425586efe7fe0',
+21 silly publish   _from: '.' }
+22 verbose getPublishConfig undefined
+23 silly mapToRegistry name react-native-swrefresh-hm
+24 silly mapToRegistry using default registry
+25 silly mapToRegistry registry http://registry.npm.taobao.org/
+26 silly mapToRegistry uri http://registry.npm.taobao.org/react-native-swrefresh-hm
+27 verbose publish registryBase http://registry.npm.taobao.org/
+28 silly publish uploading /Users/herman/.npm/react-native-swrefresh-hm/0.0.1/package.tgz
+29 verbose request uri http://registry.npm.taobao.org/react-native-swrefresh-hm
+30 verbose request sending authorization for write operation
+31 info attempt registry request try #1 at 10:20:33
+32 verbose request id e58cda7ff80cf65f
+33 http request PUT http://registry.npm.taobao.org/react-native-swrefresh-hm
+34 http 403 http://registry.npm.taobao.org/react-native-swrefresh-hm
+35 verbose headers { server: 'nginx/1.4.6 (Ubuntu)',
+35 verbose headers   date: 'Thu, 13 Jul 2017 02:20:35 GMT',
+35 verbose headers   'content-type': 'application/json; charset=utf-8',
+35 verbose headers   'transfer-encoding': 'chunked',
+35 verbose headers   connection: 'keep-alive',
+35 verbose headers   'x-current-requests': '1',
+35 verbose headers   'x-readtime': '35',
+35 verbose headers   'content-encoding': 'gzip' }
+36 verbose request invalidating /Users/herman/.npm/registry.npm.taobao.org/react-native-swrefresh-hm on PUT
+37 error publish Failed PUT 403
+38 verbose stack Error: no_perms Private mode enable, only admin can publish this module: react-native-swrefresh-hm
+38 verbose stack     at makeError (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:264:12)
+38 verbose stack     at CachingRegistryClient.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:252:14)
+38 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:178:7
+38 verbose stack     at Gunzip.onEnd (zlib.js:227:5)
+38 verbose stack     at emitNone (events.js:91:20)
+38 verbose stack     at Gunzip.emit (events.js:185:7)
+38 verbose stack     at endReadableNT (_stream_readable.js:974:12)
+38 verbose stack     at _combinedTickCallback (internal/process/next_tick.js:74:11)
+38 verbose stack     at process._tickCallback (internal/process/next_tick.js:98:9)
+39 verbose statusCode 403
+40 verbose pkgid react-native-swrefresh-hm
+41 verbose cwd /Users/herman/workspace/fork/react-native-swRefresh
+42 error Darwin 16.6.0
+43 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "publish" "."
+44 error node v6.9.0
+45 error npm  v3.7.0
+46 error code E403
+47 error no_perms Private mode enable, only admin can publish this module: react-native-swrefresh-hm
+48 error If you need help, you may report this error at:
+48 error     <https://github.com/npm/npm/issues>
+49 verbose exit [ 1, true ]

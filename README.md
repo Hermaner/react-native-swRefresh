@@ -8,7 +8,7 @@
 
 ### Installation
 ```
-npm install --save react-native-swRefresh-hm
+npm install --save react-native-swrefresh-hm
 ```
 
 
